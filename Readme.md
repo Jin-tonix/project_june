@@ -19,3 +19,6 @@
 5. git push -u origin main
 원격 레파지토리의 main브랜치에 기본적으로 push 를 하겠다.
 ->위 설정을 통해 git push 만 입력해도 main으로 파일을 추가할수 있게 된다.
+
+6. git pull
+연결되어 있는 레파지토리의 상태를 내려받는다.
