@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./data.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1> vue template 익숙해지기</h1>
+       </header>
+
+       <div class="container">
+            <div v-for="person in jsonData" :key="person.id" class="person-box">
+                <div class="person-img">
+                    <img :src="person.img" alt="Person Image">
+                </div>
+                <div class="person-details">
+                    <h2 class="person-name">이름 : {{ person.name }}</h2>
+                    <p class="person-introduction">{{ person.introduction }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    jsonData: scholar
+                };
+            }
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+</html>
