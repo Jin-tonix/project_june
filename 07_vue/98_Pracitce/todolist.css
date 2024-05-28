@@ -1,0 +1,15 @@
+header {
+    text-align: center; 
+    margin-top: 50px; 
+}
+
+.container {
+    text-align: center; 
+    margin-top: 10px; 
+    margin-left: 35px;
+}
+
+.textarea {
+    width: 300px;
+    height:100px;
+}

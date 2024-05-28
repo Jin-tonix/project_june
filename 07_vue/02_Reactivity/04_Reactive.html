@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="step01">
+        <p>
+            reactive count : {{ state.count }}
+        </p>
+        <p>
+            ref num : {{ refState.num }}
+        </p>
+
+        <p>anChangeNum :{{ anChangeNum }}</p>
+
+        <button @click="setState"> state++</button>
+        <button @click="setRefState"> refstate++</button>
+        <button @click="setAndChangeNum"> anChangeNum++</button>
+    </div>
+
+    <hr>
+
+    <div id="step02">
+        <p>{{reactiveCheck.test}}</p>
+        <button @click="setCheck">check</button>
+        <button @click="setReactiveCheck">reactiveCheck</button>
+        <button @click="checktype">typeCheck</button>
+    </div>
+
+    <script>
+        const { createApp, ref, reactive } = Vue;
+
+        createApp({
+            setup() {
+                const state = reactive({ count: 0 });
+                const refState = ref({ num: 0 });
+                const anChangeNum = ref(0);
+
+                function setState() {
+                    state.count++;
+                }
+
+                function setRefState() {
+                    refState.value.num++;
+                }
+
+                function setAndChangeNum() {
+                    anChangeNum.value++;
+                }
+
+                return {
+                    state,
+                    refState,
+                    anChangeNum,
+                    setState,
+                    setRefState,
+                    setAndChangeNum
+                };
+            }
+        }).mount("#step01");
+
+        createApp({
+            setup() {
+                const check = { test :0 };
+                const reactiveCheck = reactive(check);
+
+                function setCheck() {
+                    check.test++;
+
+                }
+                function setReactiveCheck() {
+                    reactiveCheck.test++;
+
+                }
+                function checkType() {
+                    console.log(check == reactiveCheck);
+
+                }
+                return {
+                    reactiveCheck,
+                    setCheck,
+                    checkType,
+                    setReactiveCheck
+                }
+
+            }
+
+        }).mount("#step02");
+
+    </script>
+
+</body>
+
+</html>

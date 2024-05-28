@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="./todolist.css">
+    <title>To do list</title>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>To Do List</h1>
+        </header>
+       
+        <div class="container">
+            <textarea v-model="newList" rows="5" cols="50"></textarea>
+            <button @click="saveText()">저장</button>
+        </div>
+        
+        <ul>
+            <li v-for="(todolist, index) in todolists" :key="index">{{ todolist }}</li>
+        </ul>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

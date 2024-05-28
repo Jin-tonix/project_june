@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./data.js"></script>
+    <title>vue</title>
+</head>
+
+<style>
+    .character {
+        border: 2px solid black;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .imgContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .imgContainer img {
+        width: 50%;
+        height: 50%;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <header>
+            <h1> vue template 익숙해지기</h1>
+            <button @click="toggleMode" :style="{ outline: 'none' }">{{ mode === 'character' ? 'Skill-mode' :
+                'Character-mode' }}</button>
+            <div class="container">
+                <div v-for="item in jsonData" :key="item.id" class="character">
+                    <h5 v-if="mode === 'character'">이름 : {{ item.name }}</h5>
+                    <h5 v-else>이름 : {{ item.skill }}</h5>
+                    <p>{{ item.introduction }}</p>
+                    <div class="imgContainer"  v-if="mode === 'character'" >
+                        <img :src="item.img" />
+                    </div>
+                        <div v-else>
+                            <img v-for="(imgs, index) in item.imgs" :key="index" :src="imgs" width="40px" />
+                        </div>     
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const mode = ref('character');
+                const jsonData = ref(scholar);
+
+                const toggleMode = () => {
+                    mode.value = mode.value === 'character' ? 'skill' : 'character';
+                    jsonData.value = mode.value === 'character' ? scholar : msaSkill;
+                }
+
+                return {
+                    mode,
+                    jsonData,
+                    toggleMode
+                };
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
