@@ -5,8 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <link rel="stylesheet" href="./todolist.css">
     <title>To do list</title>
+
+    <style>
+        header {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 10px;
+            margin-left: 35px;
+        }
+
+        .textarea {
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -14,17 +32,36 @@
         <header>
             <h1>To Do List</h1>
         </header>
-       
+
         <div class="container">
             <textarea v-model="newList" rows="5" cols="50"></textarea>
             <button @click="saveText()">저장</button>
         </div>
-        
+
         <ul>
             <li v-for="(todolist, index) in todolists" :key="index">{{ todolist }}</li>
         </ul>
 
     </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    newList: '',
+                    todolists: []
+                };
+            },
+            methods: {
+                saveText() {
+                    this.todolists.push(this.newList);
+                    this.newList = '';
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
 
 </body>
 

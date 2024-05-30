@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./data.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+
+    <style>
+        header {
+            display: flex;
+            justify-content: center;
+        }
+
+        body {
+            display: flex;
+            align-items: left;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .larger-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(6, 6, 6, 0.5);
+            padding: 20px;
+            width: 400px;
+            height: 500px;
+            overflow: auto;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            padding: 20px;
+            width: 400px;
+            height: 500px;
+            overflow: auto;
+        }
+
+        .button-section {
+            display: flex;
+            justify-content: center;s
+            border: 3px solid black;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            overflow: auto;
+        }
+
+        .bordered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid black;
+            width: 300px;
+            height: 300px;
+            overflow: auto;
+            text-align: center;
+            object-fit: cover;
+        }
+
+        img {
+            width: 50%;
+            height: 50%;
+        }
+
+        .skill-image {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .skill-image img {
+            padding: 20px;
+            width: 70px;
+            height: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h1>vue template 익숙해지기</h1>
+        </header>
+        <button @click="toggleRegisterMode">{{ isCharacterRegister ? 'skill register ' : 'character register '
+            }}</button>
+
+
+        <br>
+        <button @click="toggleMode">{{ isCharacterMode ? 'skill mode' : 'character mode' }}</button>
+
+        <div class="row">
+            <template v-if="isCharacterMode">
+                <div v-for="item in jsonData" :key="item.id">
+                    <div class="bordered">
+                        <p>이름 : {{ item.name }}</p>
+                        <p>소개 : {{ item.introduction }}</p>
+                        <img :src="item.img" :alt="item.name">
+                    </div>
+                </div>
+            </template>
+            <template v-else>
+                <div v-for="item in jsonSkill" :key="item.id">
+                    <div class="bordered">
+                        <p>이름 : {{ item.skill }}</p>
+                        <p>소개 : {{ item.introduction }}</p>
+                        <div class="skill-image">
+                            <div v-for="img in item.imgs" :key="img">
+                                <img :src="img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+
+        <header>
+            <h1>vue template 이해하기</h1>
+        </header>
+        <br>
+
+        <button @click="toggleRegisterMode">조회하기</button>
+        <div class="larger-container">
+            <select v-model="selected" @change="check">
+                <option value="skill register">Character Register</option>
+                <option value="character register">Skill Register</option>
+            </select>
+
+            <div class="container">
+                <template v-if="isCharacterRegister">
+                    <label>skill:</label> <input v-model="skill" />
+                    <br>
+                    <label>list:</label> <input v-model="list" />
+                    <br>
+                    <label>introduction:</label> <input v-model="introduction" />
+                    <br>
+                    <label>img:</label> <input v-model="img" />
+                    <br>
+                </template>
+                <template v-else>
+                    <label>name:</label> <input v-model="name" />
+                    <br>
+                    <label>introduction:</label> <input v-model="introduction" />
+                    <br>
+                    <label for="imgInput">Image URL:</label>
+                    <input id="imgInput" v-model="img" placeholder="" />
+                    <div v-if="img">
+                        <img :src="img" alt="Dynamic Image" style="max-width: 100%; height: auto;" />
+                    </div>
+            </div>
+            </template>
+        </div>
+    </div>
+
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const skill = ref("");
+                const list = ref("");
+                const introduction = ref("");
+                const img = ref("");
+                const name = ref("");
+                const selected = ref("skill register");
+
+                const jsonData = ref(scholar);
+                const jsonSkill = ref(msaSkill);
+                const isCharacterMode = ref(true);
+                const isCharacterRegister = ref(true);
+
+                const check = () => {
+                    console.log(selected.value);
+                };
+
+                const toggleMode = () => {
+                    isCharacterMode.value = !isCharacterMode.value;
+                };
+
+                const toggleRegisterMode = () => {
+                    isCharacterRegister.value = !isCharacterRegister.value;
+                    if (isCharacterRegister.value) {
+                        selected.value = 'character register';
+                    } else {
+                        selected.value = 'skill register';
+                    }
+                };
+
+                return {
+                    skill,
+                    list,
+                    introduction,
+                    img,
+                    name,
+                    jsonData,
+                    jsonSkill,
+                    isCharacterMode,
+                    isCharacterRegister,
+                    selected,
+                    check,
+                    toggleMode,
+                    toggleRegisterMode
+                };
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
