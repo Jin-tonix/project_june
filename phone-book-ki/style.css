@@ -1,0 +1,394 @@
+/* 헤더 스타일 */
+header {
+    display: flex;
+    /* Flexbox를 사용하여 내부 요소를 정렬합니다 */
+    justify-content: space-between;
+    /* 내부 요소를 좌우로 분산 정렬합니다 */
+    align-items: center;
+    /* 내부 요소를 수직으로 가운데 정렬합니다 */
+    background-color: hsl(269, 97%, 63%);
+    /* 배경색 지정 */
+    color: #fff;
+    /* 텍스트 색상 지정 */
+    padding: 20px;
+    /* 안쪽 여백 지정 */
+}
+
+/* 로고 스타일 */
+.logo p {
+    font-size: 24px;
+    /* 폰트 크기 지정 */
+    font-weight: bold;
+    /* 폰트 굵기 설정 */
+    display: flex;
+}
+
+/* 네비게이션 메뉴 스타일 */
+nav {
+    margin-top: 10px;
+    /* 위쪽 여백 지정 */
+}
+
+nav a {
+    color: #fffbfb;
+    /* 링크 텍스트 색상 지정 */
+    text-decoration: none;
+    /* 밑줄 제거 */
+    margin: 0 10px;
+    /* 링크 간격 지정 */
+}
+
+/* 입력 창과 버튼 스타일 */
+.input-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin-right: 10px;
+    width: 100%;
+    /* 입력 창의 너비를 부모 요소의 100%로 설정 */
+    max-width: 300px;
+    /* 최대 너비를 지정할 수도 있습니다 */
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #6812f2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* 추가한 요소들에 대한 스타일 */
+.sub-container {
+    text-align: center;
+    /* 가운데 정렬을 위해 부모 요소에서 텍스트 정렬을 설정합니다 */
+}
+
+.box {
+    display: inline-block;
+    /* 요소들을 가로로 정렬하기 위해 인라인 블록으로 설정합니다 */
+}
+
+
+
+/* Footer 스타일 */
+footer {
+    background-color: #9e47fc;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Footer 네비게이션바 스타일 */
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.dongle-regular {
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* 이미지 사이즈 조정 */
+.sub-container div a img {
+    width: 50%;
+    /* 이미지 너비 */
+    height: auto;
+    /* 높이 자동 조정 */
+    padding: 10px;
+}
+
+/* 이미지 간격 조정 */
+.sub-container div {
+    display: flex;
+    justify-content: space-around;
+    /* 이미지들을 가운데 정렬하고 간격을 주기 위해 */
+    margin-bottom: 20px;
+    /* 그리드 아래 여백 */
+}
+
+/* 컨테이너 간 간격 조정 */
+.sub-container {
+    margin-top: 20px;
+    /* 컨테이너 위 여백 */
+}
+
+/* 반응형 이미지 크기 조정 */
+@media screen and (max-width: 768px) {
+    .sub-container div a img {
+        width: 80px;
+        /* 미디어 쿼리에서 이미지 크기 조정 */
+    }
+}
+
+/* 이미지 사이즈 조정 */
+.sub-container div a img {
+    width: 70px;
+    /* 이미지 너비 */
+    height: 70;
+    /* 높이 자동 조정 */
+
+}
+
+/* 이미지 간격 조정 */
+.sub-container div {
+    display: flex;
+    justify-content: space-around;
+    /* 이미지들을 가운데 정렬하고 간격을 주기 위해 */
+    margin-bottom: 20px;
+    /* 그리드 아래 여백 */
+}
+
+/* 컨테이너 간 간격 조정 */
+.sub-container {
+    margin-top: 20px;
+    /* 컨테이너 위 여백 */
+}
+
+/* 반응형 이미지 크기 조정 */
+@media screen and (max-width: 768px) {
+    .sub-container div a img {
+        width: 80px;
+        /* 미디어 쿼리에서 이미지 크기 조정 */
+    }
+}
+
+/* iframe 스타일 조정 */
+.iframe-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+iframe {
+
+    border: none;
+}
+
+/*hospital 스타일 조정*/
+.iframe-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
+/* 맵을 보여줄 컨테이너의 크기를 지정해줍니다. */
+#map {
+    width: 500px;
+    height: 400px;
+    /* 맵의 높이를 조정할 수 있습니다. */
+}
+
+.map {
+    justify-content: center;
+    width: 100%;
+    height: 400px;
+}
+
+#map {
+    width: 50%;
+    height: 400px;
+    float: left;
+}
+
+#marker-list {
+    width: 50%;
+    float: right;
+    padding: 20px;
+}
+
+#marker-list h2 {
+    font-family: 'Dongle', sans-serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#marker-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#marker-list li {
+    margin-bottom: 10px;
+}
+
+.map_wrap,
+.map_wrap * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+    font-size: 12px;
+}
+
+.map_wrap {
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+
+#category {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+    border: 1px solid #909090;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    background: #fff;
+    overflow: hidden;
+    z-index: 2;
+}
+
+#category li {
+    float: left;
+    list-style: none;
+    width: 50px;
+    border-right: 1px solid #acacac;
+    padding: 6px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+#category li.on {
+    background: #eee;
+}
+
+#category li:hover {
+    background: #ffe6e6;
+    border-left: 1px solid #acacac;
+    margin-left: -1px;
+}
+
+#category li:last-child {
+    margin-right: 0;
+    border-right: 0;
+}
+
+#category li span {
+    display: block;
+    margin: 0 auto 3px;
+    width: 27px;
+    height: 28px;
+}
+
+#category li .category_bg {
+    background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;
+}
+
+#category li .bank {
+    background-position: -10px 0;
+}
+
+#category li .mart {
+    background-position: -10px -36px;
+}
+
+#category li .pharmacy {
+    background-position: -10px -72px;
+}
+
+#category li .oil {
+    background-position: -10px -108px;
+}
+
+#category li .cafe {
+    background-position: -10px -144px;
+}
+
+#category li .store {
+    background-position: -10px -180px;
+}
+
+#category li.on .category_bg {
+    background-position-x: -46px;
+}
+
+#category li{
+    color:black;
+}
+
+.placeinfo_wrap {
+    position: absolute;
+    bottom: 28px;
+    left: -150px;
+    width: 300px;
+}
+
+.placeinfo {
+    position: relative;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    background: #fff;
+}
+
+.placeinfo:nth-of-type(n) {
+    border: 0;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.placeinfo_wrap .after {
+    content: '';
+    position: relative;
+    margin-left: -12px;
+    left: 50%;
+    width: 22px;
+    height: 12px;
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.placeinfo a,
+.placeinfo a:hover,
+.placeinfo a:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+.placeinfo a,
+.placeinfo span {
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.placeinfo span {
+    margin: 5px 5px 0 5px;
+    cursor: default;
+    font-size: 13px;
+}
+
+.placeinfo .title {
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px 6px 0 0;
+    margin: -1px -1px 0 -1px;
+    padding: 10px;
+    color: #fff;
+    background: #d95050;
+    background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+
+.placeinfo .tel {
+    color: #0f7833;
+}
+
+.placeinfo .jibun {
+    color: #999;
+    font-size: 11px;
+    margin-top: 0;
+}
+

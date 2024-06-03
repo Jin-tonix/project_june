@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전화번호부</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="phone.js" href="phone.js">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d81efa0ecfe59e238c0907b1af9c6d7&libraries=services"></script>
+
+</head>
+
+<body>
+    <header>
+        <div>
+            <!-- 네비게이션 메뉴 -->
+            <div class="logo">
+                <p>김화연님 </p>
+                <p style="margin-top:-12px">
+                    <a href="index.htm2">전화번호부</a>
+                </p>
+                <p style="margin-top:-12px">
+                    <a href="index3.html">
+                        메뉴</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="main-container">
+        <div class="sub-container">
+            <div class="map_wrap">
+
+                <!-- 카테고리 선택 영역 -->
+                <ul id="category">
+                    <li id="FD6" data-order="0">
+                        음식점
+                    </li>
+                    <li id="CE7" data-order="1">
+                        카페
+                    </li>
+                    <li id="HP8" data-order="2">
+                        병원
+                    </li>
+                    <li id="PM9" data-order="3">
+                        약국
+                    </li>
+                    <li id="MT1" data-order="4">
+                        쇼핑몰
+                    </li>
+                    <li id="BK9" data-order="5">
+                        은행
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- 마커 정보 목록 -->
+    <ul id="markers-list"></ul>
+    </div>
+    </div>
+    </section>
+
+    <footer>
+        <nav class="footer-nav">
+            <a href="#">홈</a>
+            <a href="#">즐겨찾기</a>
+            <a href="#">공유</a>
+            <a href="#">로그아웃</a>
+        </nav>
+    </footer>
+
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services"></script>
+    <script src="phone.js"></script>
+
+    <script>
+
+        function displayPlaceInfo(place) {
+            var content = '<div class="placeinfo">' +
+                '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';
+
+            if (place.road_address_name) {
+                content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
+                    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
+            } else {
+                content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
+            }
+
+            content += '    <span class="tel">' + place.phone + '</span>' +
+                '</div>' +
+                '<div class="after"></div>';
+
+            // 리스트에 표시되는 마커 정보를 업데이트합니다
+            var markersList = document.getElementById('markers');
+            markersList.innerHTML = '';
+            markersList.innerHTML += '<li>' +
+                '<strong>' + place.place_name + '</strong>' +
+                '<p>' + place.address_name + '</p>' +
+                '<p>' + place.phone + '</p>' +
+                '</li>';
+            // 커스텀 오버레이 설정
+            contentNode.innerHTML = content;
+            placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+            placeOverlay.setMap(map);
+        }
+
+    </script>
