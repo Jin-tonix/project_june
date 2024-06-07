@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>검색결과 및 지도</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="phone.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d81efa0ecfe59e238c0907b1af9c6d7&libraries=services"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <!-- 네비게이션 메뉴 -->
+            <div class="logo">
+                <p>김화연님 </p>
+                <p>전화번호부</p>
+                <p>메뉴</p>
+            </div>
+        </div>
+    </header>
+    <section class="main-container">
+        <div class="search-result-container">
+            <h1>검색 결과</h1>
+            <div id="searchResults"></div>
+            <div class="map-container">
+                <h1>지도</h1>
+                <div id="map"></div>
+            </div>
+    </section>
+    <footer>
+        <nav class="footer-nav">
+            <a href="#">홈</a>
+            <a href="#">즐겨찾기</a>
+            <a href="#">공유</a>
+            <a href="#">로그아웃</a>
+        </nav>
+    </footer>
+
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services"></script>
+    <script src="phone.js"></script>
+
+
+</body>
+
+</html>

@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d81efa0ecfe59e238c0907b1af9c6d7&libraries=services"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d81efa0ecfe59e238c0907b1af9c6d7&libraries=services"></script>
 
 </head>
 
@@ -19,19 +20,18 @@
             <!-- 네비게이션 메뉴 -->
             <div class="logo">
                 <p>김화연님 </p>
+                <p>전화번호부</p>
                 <p style="margin-top:-12px">
-                    <a href="index2.html">전화번호부</a></p>
-                    <p style="margin-top:-12px">
-                        <a href="index2.html">
-                            메뉴</a>
+                    <a href="index2.html">
+                        메뉴</a>
             </div>
         </div>
     </header>
     <section class="main-container">
         <div class="input-container">
-            <input type="text" placeholder="검색검색검색">
-            <a class="button">버튼</a>
-        </div>
+            <input id="searchInput" type="text" placeholder="장소 이름 입력">
+            <a class="button" onclick="search()" href="index3.html">검색</a>
+      
         <div class="sub-container">
             <div class="first">
                 <div>
@@ -40,9 +40,10 @@
                             alt="음식점">
                     </a>
                     <div>
-                        <a href="index2.html"><img src="https://icons.iconarchive.com/icons/icons8/windows-8/256/Food-Bar-icon.png"
-                            alt="술집"></a>
-                        </div>
+                        <a href="index2.html"><img
+                                src="https://icons.iconarchive.com/icons/icons8/windows-8/256/Food-Bar-icon.png"
+                                alt="술집"></a>
+                    </div>
 
                 </div>
             </div>
@@ -59,23 +60,35 @@
             </div>
             <div class="third">
                 <div>
-                    <a href="index3.html"><img
+                    <a href="index2.html"><img
                             src="https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-mono/256/Shopping-Cart-icon.png"
                             alt="쇼핑몰"></a>
-                    <a href="index3.html"><img src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Bank-icon.png"
-                            alt="은행"></a>
+                    <a href="index2.html"><img
+                            src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Bank-icon.png" alt="은행"></a>
                 </div>
             </div>
         </div>
     </section>
     <footer>
         <nav class="footer-nav">
-            <a href="#">홈</a>
+            <a href="index.html">홈</a>
             <a href="#">즐겨찾기</a>
             <a href="#">공유</a>
             <a href="#">로그아웃</a>
         </nav>
     </footer>
+
+    <script type="text/javascript">
+        function search() {
+            var keyword = document.getElementById('searchInput').value;
+            if (keyword.trim() === '') {
+                alert('검색어를 입력하세요.');
+                return;
+            }
+            window.location.href = 'index3.html?keyword=' + encodeURIComponent(keyword);
+        }
+    </script>
+
 </body>
 
 </html>
