@@ -1,7 +1,7 @@
 var placeOverlay = new kakao.maps.CustomOverlay({ zIndex: 1 }),
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트입니다 
     markers = [], // 마커를 담을 배열입니다
-    currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
+    currCategory = 'FD6'; // 현재 선택된 카테고리를 가지고 있을 변수입니다 (FD6로 변경)
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -29,9 +29,6 @@ addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
 // 커스텀 오버레이 컨텐츠를 설정합니다
 placeOverlay.setContent(contentNode);
 
-// 각 카테고리에 클릭 이벤트를 등록합니다
-addCategoryClickEvent();
-
 
 // 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
 function addEventHandle(target, type, callback) {
@@ -54,7 +51,8 @@ function searchPlaces() {
     // 지도에 표시되고 있는 마커를 제거합니다
     removeMarker();
 
-    ps.categorySearch(currCategory, placesSearchCB, { useMapBounds: true });
+    // 여기서 카테고리를 FD6로 고정
+    ps.categorySearch('FD6', placesSearchCB, { useMapBounds: true });
 }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -142,23 +140,6 @@ function displayPlaceInfo(place) {
     contentNode.innerHTML = content;
     placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
     placeOverlay.setMap(map);
-}
-
-// 각 카테고리에 클릭 이벤트를 등록합니다
-function addCategoryClickEvent() {
-    var category = document.getElementById('category'),
-        children = category.children;
-
-    for (var i = 0; i < children.length; i++) {
-        children[i].onclick = onClickCategory;
-    }
-}
-
-// 카테고리를 클릭했을 때 호출되는 함수입니다
-function onClickCategory() {
-    var id = this.id,
-        className = this.className;
-
     placeOverlay.setMap(null);
 
     if (className === 'on') {
@@ -172,17 +153,6 @@ function onClickCategory() {
     }
 }
 
-// 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
-function changeCategoryClass(el) {
-    var category = document.getElementById('category'),
-        children = category.children,
-        i;
 
-    for (i = 0; i < children.length; i++) {
-        children[i].className = '';
-    }
-
-    if (el) {
-        el.className = 'on';
-    }
-}
+// 초기화 함수 실행
+searchPlaces();
