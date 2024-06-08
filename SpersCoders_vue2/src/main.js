@@ -1,29 +1,13 @@
-
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from "./router/index.js";
+
 
 
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
 
-const imageUrls = [
-    'https://icons.iconarchive.com/icons/aniket-suvarna/box-regular/256/bx-restaurant-icon.png',
-    'https://icons.iconarchive.com/icons/icons8/windows-8/256/Food-Bar-icon.png',
-    'https://icons.iconarchive.com/icons/iconoir-team/iconoir/256/hospital-icon.png',
-    'https://icons.iconarchive.com/icons/erix-subyarko/medical/256/Pharmacy-Pill-Drug-Bottle-Medicine-icon.png',
-    'https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-mono/256/Shopping-Cart-icon.png',
-    'https://icons.iconarchive.com/icons/iconsmind/outline/256/Bank-icon.png'
-  ];
-
-  const pageIds = ['food', 'bar', 'hospital', 'pharmacy', 'mall', 'bank'];
-
-  const imageData = imageUrls.map((imageUrl, index) => {
-    return { imageUrl, pageId: pageIds[index] };
-  });
-
-  console.log(imageData);
 
 var placeOverlay = new kakao.maps.CustomOverlay({ zIndex: 1 }),
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트입니다 
@@ -35,7 +19,6 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
         level: 5 // 지도의 확대 레벨
     };
-
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption);
 

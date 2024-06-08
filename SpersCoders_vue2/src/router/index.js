@@ -11,45 +11,45 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/search/:search',
       name: 'search',
       component: AboutView
     },
     {
-      path: '/food',
+      path: '/food/:food',
       name: 'food',
       component: FoodView
     },
     {
-      path: '/bar',
+      path: '/bar/:bar',
       name: 'bar',
       component: BarView
     },
     {
-      path: '/hospital',
+      path: '/hospital/:hospital',
       name: 'hospital',
       component: HospitalView
     },
     {
-      path: '/pharmacy',
+      path: '/pharmacy/:pharmacy',
       name: 'pharmacy',
       component: PharmacyView
     },
     {
-      path: '/mall',
+      path: '/mall/:mall',
       name: 'mall',
       component: MallView
     },
     {
-      path: '/bank',
+      path: '/bank/:bank',
       name: 'bank',
       component: BankView
     },
-    {
-      path: '/map/:code',
-      name: 'map',
-      component: BankView
-    },
+    // {
+    //   path: '/map/:map',
+    //   name: 'map', // 수정된 부분: name을 'map'으로 지정
+    //   component: Map // 수정된 부분: Map 컴포넌트로 변경
+    // },
   ]
 });
 

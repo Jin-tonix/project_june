@@ -1,37 +1,118 @@
 <template>
-  <!-- 카테고리의 장소 정보를 출력하는 반복문 -->
-  <div v-for="item in category" :key="item.codeNumber">
-    <!-- 장소의 코드 번호, 이름, 주소, 전화번호를 출력 -->
-    {{ item.codeNumber }} - {{ item.name }} - {{ item.address }} - {{ item.number }}
-  </div>
+  <div id="map" style="width:100%;height:350px;"></div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-
-// 장소 정보를 저장할 ref 변수 생성
-const category = ref([]);
-
-// 컴포넌트가 마운트된 후에 실행될 함수 정의
-onMounted(() => {
-  // 카카오 맵 API를 사용하여 카테고리 정보를 가져오는 요청
-  axios.get('https://dapi.kakao.com/v2/local/search/category.json', {
-    params: {
-      category_group_code: 'FD6', // 음식점 카테고리 코드
-      x: '127.05560862806676', // 경도
-      y: '37.548495288349505', // 위도
+<script>
+export default {
+  data() {
+    return {
+      placeOverlay: null,
+      markers: [],
+      currCategory: '',
+      map: null,
+      ps: null,
+    };
+  },
+  mounted() {
+    this.initMap();
+    this.addCategoryClickEvent();
+  },
+  methods: {
+    initMap() {
+      const mapContainer = document.getElementById('map');
+      const mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567),
+        level: 5
+      };
+      this.map = new kakao.maps.Map(mapContainer, mapOption);
+      this.ps = new kakao.maps.services.Places(this.map);
+      this.placeOverlay = new kakao.maps.CustomOverlay({ zIndex: 1 });
     },
-    headers: {
-      Authorization: 'KakaoAK 0d81efa0ecfe59e238c0907b1af9c6d7', // 카카오 API 키
+    addCategoryClickEvent() {
+      const category = document.getElementById('category');
+      const children = category.children;
+      for (let i = 0; i < children.length; i++) {
+        children[i].onclick = this.onClickCategory;
+      }
     },
-  })
-  .then(response => {
-    // 응답 데이터를 category ref 변수에 저장
-    category.value = response.data;
-  })
-  .catch(error => {
-    console.error(error); // 오류 발생 시 콘솔에 오류 로그 출력
-  });
-});
+    goToCategory(event) {
+      const id = event.target.id;
+      const className = event.target.className;
+      this.placeOverlay.setMap(null);
+      if (className === 'on') {
+        this.currCategory = '';
+        this.changeCategoryClass();
+        this.removeMarker();
+      } else {
+        this.currCategory = id;
+        this.changeCategoryClass(event.target);
+        this.searchPlaces();
+      }
+    },
+    searchPlaces() {
+      if (!this.currCategory) return;
+      this.placeOverlay.setMap(null);
+      this.removeMarker();
+      this.ps.categorySearch(this.currCategory, this.placesSearchCB, { useMapBounds: true });
+    },
+    placesSearchCB(data, status, pagination) {
+      if (status === kakao.maps.services.Status.OK) {
+        this.displayPlaces(data);
+      } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        // 검색결과가 없는 경우
+      } else if (status === kakao.maps.services.Status.ERROR) {
+        // 검색 중 에러 발생
+      }
+    },
+    displayPlaces(places) {
+      for (let i = 0; i < places.length; i++) {
+        const marker = this.addMarker(new kakao.maps.LatLng(places[i].y, places[i].x));
+        marker.addListener('click', () => {
+          this.displayPlaceInfo(places[i]);
+        });
+      }
+    },
+    addMarker(position) {
+      const marker = new kakao.maps.Marker({
+        position: position,
+        map: this.map
+      });
+      this.markers.push(marker);
+      return marker;
+    },
+    removeMarker() {
+      for (let i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(null);
+      }
+      this.markers = [];
+    },
+    displayPlaceInfo(place) {
+      const content = `<div class="placeinfo">
+                    <a class="title" href="${place.place_url}" target="_blank" title="${place.place_name}">${place.place_name}</a>`;
+      let addressContent = '';
+      if (place.road_address_name) {
+        addressContent = `<span title="${place.road_address_name}">${place.road_address_name}</span>
+                      <span class="jibun" title="${place.address_name}">(지번 : ${place.address_name})</span>`;
+      } else {
+        addressContent = `<span title="${place.address_name}">${place.address_name}</span>`;
+      }
+      const telContent = `<span class="tel">${place.phone}</span></div><div class="after"></div>`;
+      const contentNode = document.createElement('div');
+      contentNode.innerHTML = content + addressContent + telContent;
+      this.placeOverlay.setContent(contentNode);
+      this.placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+      this.placeOverlay.setMap(this.map);
+    },
+    changeCategoryClass(el) {
+      const category = document.getElementById('category');
+      const children = category.children;
+      for (let i = 0; i < children.length; i++) {
+        children[i].className = '';
+      }
+      if (el) {
+        el.className = 'on';
+      }
+    }
+  }
+};
 </script>
